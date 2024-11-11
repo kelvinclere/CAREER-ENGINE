@@ -1,0 +1,24 @@
+
+<h1>Careers and Schools Recommendations for JSS Students <%= @user.name %></h1>
+
+<h2>Recommended Careers</h2>
+<% if @recommended_careers.any? %>
+  <ul>
+    <% @recommended_careers.each do |career| %>
+      <li><%= career.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No career recommendations at this time.</p>
+<% end %>
+
+<h2>Recommended Schools</h2>
+<% if @recommended_schools.any? %>
+  <ul>
+    <% @recommended_schools.each do |school| %>
+      <li><%= school.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No school recommendations at this time.</p>
+<% end %>
