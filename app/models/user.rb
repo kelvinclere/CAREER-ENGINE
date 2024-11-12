@@ -12,6 +12,11 @@ class User < ApplicationRecord
 
   has_many :liked_schools
   has_many :schools, through: :liked_schools
+  has_many :grades
+
+   def get_grade_for_subject(subject)
+    grades.find_by(subject: subject)
+  end
 
   
   def recommend_careers

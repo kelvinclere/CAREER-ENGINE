@@ -1,7 +1,4 @@
-
 ActiveRecord::Base.connection.execute("PRAGMA journal_mode = WAL;")
-
-
 
 require 'faker'
 
@@ -11,6 +8,7 @@ Career.destroy_all
 School.destroy_all
 LikedCareer.destroy_all
 LikedSchool.destroy_all
+Grade.destroy_all  # Clear any existing grades
 
 # Seed Users (creating 30 users with unique names)
 30.times { User.create(name: Faker::Name.unique.name) }
@@ -45,6 +43,18 @@ end
 User.find_each do |user|
   3.times do
     user.liked_schools.create!(school: School.order("RANDOM()").first)
+  end
+end
+
+# Seed Grades for each user (randomly assigning grades to subjects)
+subjects = ["English", "Kenyan Sign Language", "Integrated Science", "Religion Education", "Agriculture & Nutrition", "Integrated Science Project"
+"Social Studies", "Pre-Technical Studies", "Kiswahili", "Mathematics", "Pre-Technical Studies", "Creative Arts and Sports"]
+User.find_each do |user|
+  subjects.each do |subject|
+    user.grades.create!(
+      subject: subject,
+      grade: ["A", "B", "C"].sample
+    )
   end
 end
 
